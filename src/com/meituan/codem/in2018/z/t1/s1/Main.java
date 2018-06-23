@@ -1,4 +1,4 @@
-package com.meituan.codem.in2018.t1.s1;
+package com.meituan.codem.in2018.z.t1.s1;
 
 import java.util.Scanner;
 
