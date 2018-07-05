@@ -256,6 +256,8 @@ public class Test2 {
 
     public static void main(String[] args) throws ClassNotFoundException, IOException {
         main32(null);
+        main64(null);
+        main128(null);
     }
 
     public static void mainq(String[] args) throws ClassNotFoundException, IOException {
@@ -369,8 +371,8 @@ public class Test2 {
             String r = binaryToJW(ca);
             int length = r.length();
             String info = length + "\t" + r + "\n";
-            System.out.print(info);
-            fos.write(info.getBytes());
+//            System.out.print(info);
+//            fos.write(info.getBytes());
             Integer value = record.get(length);
             if(value == null) {
                 record.put(length, 1);
@@ -381,8 +383,8 @@ public class Test2 {
             r = binaryToJW(ca);
             length = r.length();
             info = length + "\t" + r + "\n";
-            System.out.print(info);
-            fos.write(info.getBytes());
+//            System.out.print(info);
+//            fos.write(info.getBytes());
             value = record.get(length);
             if(value == null) {
                 record.put(length, 1);
