@@ -1,19 +1,14 @@
 package yasuo;
 
-import org.omg.PortableInterceptor.INACTIVE;
-
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
 public class Test2 {
 
-    public static char[] fineLeft(char[] ca) {
+    public static char[] findLeft(char[] ca) {
         char[] cat = new char[ca.length];
         for (int i = 0; i < ca.length; i++) {
             cat[i] = '0';
@@ -255,9 +250,49 @@ public class Test2 {
     }
 
     public static void main(String[] args) throws ClassNotFoundException, IOException {
-        main32(null);
-        main64(null);
-        main128(null);
+        String s1 = "000001111100000";
+        System.out.println("转换前：" + String.format("% 4d", s1.length()) + "：" + s1);
+        String s2 = binaryToZS(s1.toCharArray());
+        System.out.println("转换后：" + String.format("% 4d", s2.length()) + "：" + s2);
+        System.out.println();
+//        for (int i = 0; i < 2; i++) {
+//            s1 = s2;
+//            System.out.println("转换前：" + String.format("% 4d", s1.length()) + "：" + s1);
+//            s2 = binaryToZS(s1.toCharArray());
+//            System.out.println("转换后：" + String.format("% 4d", s2.length()) + "：" + s2);
+//            System.out.println();
+//        }
+    }
+
+    public static void maini(String[] args) throws ClassNotFoundException, IOException {
+        String s1 = "0110000101100010011000110110010001100101011001100110011101101000";
+        System.out.println("转换前：" + String.format("% 4d", s1.length()) + "：" + s1);
+        String s2 = binaryToZS(s1.toCharArray());
+        System.out.println("转换后：" + String.format("% 4d", s2.length()) + "：" + s2);
+        System.out.println();
+        s1 = "1111111111111111111111111111111111111111111111111111111111111111";
+        System.out.println("转换前：" + String.format("% 4d", s1.length()) + "：" + s1);
+        s2 = binaryToZS(s1.toCharArray());
+        System.out.println("转换后：" + String.format("% 4d", s2.length()) + "：" + s2);
+        System.out.println();
+        s1 = "0000000000000000000000000000100000000000000000000000000000000000";
+        System.out.println("转换前：" + String.format("% 4d", s1.length()) + "：" + s1);
+        s2 = binaryToZS(s1.toCharArray());
+        System.out.println("转换后：" + String.format("% 4d", s2.length()) + "：" + s2);
+        System.out.println();
+        s1 = "0001100001110000011000000000100000000010000011100000010000000000";
+        System.out.println("转换前：" + String.format("% 4d", s1.length()) + "：" + s1);
+        s2 = binaryToZS(s1.toCharArray());
+        System.out.println("转换后：" + String.format("% 4d", s2.length()) + "：" + s2);
+        System.out.println();
+    }
+
+    public static void main3(String[] args) throws ClassNotFoundException, IOException {
+        main8(null);
+//        main16(null);
+//        main32(null);
+//        main64(null);
+//        main128(null);
     }
 
     public static void mainq(String[] args) throws ClassNotFoundException, IOException {
@@ -266,6 +301,50 @@ public class Test2 {
         byte[] bytes = "你好".getBytes();
         fos.write(bytes);
         fos.flush();
+        fos.close();
+    }
+
+    public static void main8(String[] args) throws IOException, ClassNotFoundException {
+        String file = Class.forName("yasuo.Test2").getResource("/yasuo/8.txt").getFile();
+        FileOutputStream fos = new FileOutputStream(file);
+
+        char[] ca = new char[8];
+        for (int i = 0; i < ca.length; i++) {
+            ca[i] = '0';
+        }
+        TreeMap<Integer, Integer> record = new TreeMap<>();
+        cs(ca, 0, record, fos);
+        String s = "***********************************\n";
+        System.out.print(s);
+        fos.write(s.getBytes());
+        Set<Map.Entry<Integer, Integer>> entries = record.entrySet();
+        for (Map.Entry<Integer, Integer> entry:entries) {
+            String info = entry.getKey() + "\t" + entry.getValue() + "\n";
+            System.out.print(info);
+            fos.write(info.getBytes());
+        }
+        fos.close();
+    }
+
+    public static void main16(String[] args) throws IOException, ClassNotFoundException {
+        String file = Class.forName("yasuo.Test2").getResource("/yasuo/16.txt").getFile();
+        FileOutputStream fos = new FileOutputStream(file);
+
+        char[] ca = new char[16];
+        for (int i = 0; i < ca.length; i++) {
+            ca[i] = '0';
+        }
+        TreeMap<Integer, Integer> record = new TreeMap<>();
+        cs(ca, 0, record, fos);
+        String s = "***********************************\n";
+        System.out.print(s);
+        fos.write(s.getBytes());
+        Set<Map.Entry<Integer, Integer>> entries = record.entrySet();
+        for (Map.Entry<Integer, Integer> entry:entries) {
+            String info = entry.getKey() + "\t" + entry.getValue() + "\n";
+            System.out.print(info);
+            fos.write(info.getBytes());
+        }
         fos.close();
     }
 
@@ -368,11 +447,11 @@ public class Test2 {
     public static void cs(char[] ca, int i, TreeMap<Integer, Integer> record, FileOutputStream fos) throws IOException {
         if(i == ca.length - 1) {
             ca[i] = '0';
-            String r = binaryToJW(ca);
+            String r = binaryToZS(ca);
             int length = r.length();
-            String info = length + "\t" + r + "\n";
-//            System.out.print(info);
-//            fos.write(info.getBytes());
+            String info = length + "\t\t" + new String(ca)  + "\t\t" + r+ "\n";
+            System.out.print(info);
+            fos.write(info.getBytes());
             Integer value = record.get(length);
             if(value == null) {
                 record.put(length, 1);
@@ -380,11 +459,11 @@ public class Test2 {
                 record.put(length, value + 1);
             }
             ca[i] = '1';
-            r = binaryToJW(ca);
+            r = binaryToZS(ca);
             length = r.length();
-            info = length + "\t" + r + "\n";
-//            System.out.print(info);
-//            fos.write(info.getBytes());
+            info = length + "\t\t" + new String(ca)  + "\t\t" + r+ "\n";
+            System.out.print(info);
+            fos.write(info.getBytes());
             value = record.get(length);
             if(value == null) {
                 record.put(length, 1);
@@ -400,7 +479,7 @@ public class Test2 {
         ca[i] = '0';
     }
 
-    public static String binaryToJW(char[] ca) {
+    public static String binaryToZS(char[] ca) {
         int ws = (int) (Math.log(ca.length) / Math.log(2) + 1);
         // 判断是否是2的整数次方
         // 是整数次方
@@ -410,7 +489,7 @@ public class Test2 {
             return new String(r);
         } else {
             // 寻找左右端点
-            char[] left = fineLeft(ca);
+            char[] left = findLeft(ca);
             char[] right = findRight(ca);
             char[] leftI = new char[left.length];
             System.arraycopy(left, 0, leftI, 0, left.length);

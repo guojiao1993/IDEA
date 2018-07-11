@@ -60,6 +60,72 @@ public class Test {
         System.out.println(Integer.toBinaryString(i));
     }
 
+    public static void mainz(String[] args) throws ClassNotFoundException, IOException {
+        int max = 0;
+        for (long i = Long.MAX_VALUE / 2; i < Long.MAX_VALUE; i++) {
+            System.out.print(i + "：");
+            long a = i;
+            // 取2的指数
+            double s1 = Math.log(a) / Math.log(2);
+            // 判断指数是否为整数
+            if (s1 % 1 == 0) {
+                System.out.print((int) Math.pow(2, s1));
+            } else {
+                ArrayList<Integer> f = new ArrayList<>();
+                ArrayList<Integer> z = new ArrayList<>();
+                double left = Math.pow(2, (int) s1);
+                double right = Math.pow(2, (int) (s1 + 1));
+                double leftI = left;
+                double rightI = right;
+                double prefer = 3;
+                int count = 0;
+                while (true) {
+                    if (Math.abs(a - leftI) > Math.abs(a - rightI)) {
+                        leftI = leftI + (rightI - leftI) / 2;
+                        prefer = rightI;
+                    } else {
+                        rightI = leftI + (rightI - leftI) / 2;
+                        prefer = leftI;
+                    }
+                    double s = Math.abs(a - prefer);
+                    if (Math.log(s) / Math.log(2) % 1 == 0) {
+                        if (a < prefer) {
+                            s = -s;
+                            f.add((int) s);
+                        } else {
+                            z.add((int) s);
+                        }
+//                        System.out.print((int)s + "\t\t");
+                        count++;
+                        a = (int) prefer;
+                        leftI = left;
+                        rightI = right;
+                    }
+                    if (a == (int) left || a == (int) right) {
+                        // 打印负
+                        for (int j = 0; j < f.size(); j++) {
+                            System.out.print(f.get(j) + "\t\t");
+                        }
+                        // 打印中值
+                        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + a + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+                        // 打印正
+                        for (int j = 0; j < z.size(); j++) {
+                            System.out.print(z.get(j) + "\t\t");
+                        }
+                        // 打印次数
+                        System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + count);
+                        if (count > max) {
+                            max = count;
+                        }
+                        break;
+                    }
+                }
+            }
+            System.out.println();
+        }
+        System.out.println(max);
+    }
+
     public static void maini(String[] args) throws ClassNotFoundException, IOException {
         int max = 0;
         for (int i = Integer.MAX_VALUE / 2; i < Integer.MAX_VALUE; i++) {
@@ -202,7 +268,7 @@ public class Test {
         }
     }
 
-    public static void mainh(String[] args) {
+    public static void mainr(String[] args) {
         String a = "a.txt";
         String b = "b.txt";
         String d = "d.txt";
@@ -222,24 +288,18 @@ public class Test {
         System.out.println("*******************************************");
         System.out.println(s);
         System.out.println("*******************************************");
-        System.out.println(new
-
-                BigInteger(s, 2).
-
-                toString(10));
+        System.out.println(new BigInteger(s, 2).toString(10));
         System.out.println("*******************************************");
-        System.out.println(new
-
-                BigInteger(s, 2).
-
-                toString(36));
+        System.out.println(new BigInteger(s, 2).toString(36));
     }
 
-    public static void maing(String[] args) throws ClassNotFoundException, IOException {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
         String a = "a.txt";
         String b = "b.txt";
         String d = "d.txt";
-        InputStream inputStream = Class.forName("yasuo.Test").getResourceAsStream("/yasuo/" + d);
+        String p = "p.jpg";
+        String q = "q.jpg";
+        InputStream inputStream = Class.forName("yasuo.Test").getResourceAsStream("/yasuo/" + q);
         byte[] buffer = new byte[1024];
         int read = 0;
         StringBuffer sb = new StringBuffer();
@@ -248,6 +308,9 @@ public class Test {
             for (int i = 0; i < read; i++) {
                 System.out.print(buffer[i] + " ");
                 sb.append(byteToBits(buffer[i]));
+//                if((i+1) % 2 == 0) {
+//                    sb.append(" ");
+//                }
             }
             System.out.println();
         }
@@ -255,9 +318,10 @@ public class Test {
         String s = sb.toString();
         System.out.println("*******************************************");
         System.out.println(s);
-        System.out.println("*******************************************");
-        System.out.println(new BigInteger(s, 2).toString(10));
-        System.out.println("*******************************************");
-        System.out.println(new BigInteger(s, 2).toString(36));
+//        System.out.println("*******************************************");
+//        s = s.replace(" ", "");
+//        System.out.println(new BigInteger(s, 2).toString(10));
+//        System.out.println("*******************************************");
+//        System.out.println(new BigInteger(s, 2).toString(36));
     }
 }
