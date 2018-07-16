@@ -1,4 +1,4 @@
-package thread.DuoXianChengHeXinJiShu;
+package thread.StartAndRun;
 
 public class Test {
     public static void main(String[] args) {
