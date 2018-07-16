@@ -1,8 +1,11 @@
-package mianshibaodian;
+package test;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * 来自《面试宝典》
+ */
 public class C4410 {
     public static void main(String[] args) {
         judgeChineseCharactor("Hello World");
