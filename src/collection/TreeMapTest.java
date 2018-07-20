@@ -1,4 +1,4 @@
-package type;
+package collection;
 
 import java.util.*;
 
