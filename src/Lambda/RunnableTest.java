@@ -1,4 +1,4 @@
-package lambda;
+package Lambda;
 
 public class RunnableTest {
     public static void main(String[] args) {

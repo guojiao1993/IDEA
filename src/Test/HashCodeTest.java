@@ -1,4 +1,4 @@
-package test;
+package Test;
 
 public class HashCodeTest {
     public static void main(String[] args) {
