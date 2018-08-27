@@ -1,3 +1,13 @@
+### ThreadPoolExecutor
+可以通过继承ThreadPoolExecutor，并重写其中的运行前、运行后和终止方法来记录日志信息。
+```java
+@Override
+protected void beforeExecute(Thread t, Runnable r) {
+    super.beforeExecute(t, r);
+    System.out.println(String.format("Thread %s : start %s", t, r));
+    startTime.set(System.nanoTime());
+}
+```
 ### Executor
 创建一个有10个线程的线程池，然后去执行20个任务。
 ```java
